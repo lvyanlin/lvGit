@@ -1,0 +1,71 @@
+ <!DOCTYPE html>
+ <html>
+ 	<head>
+ 		<meta charset="utf-8" />
+ 		<title></title>
+ 		<!--包含了全部的样式，相当于是主题，如果想要换成其他，就引入其他目录下的easyui.css -->
+ 		<link rel="stylesheet" type="text/css" href="jquery-easyui-1.6.6/themes/default/easyui.css"/>
+ 		 <!-- css是一些小图标-->
+ 		<link rel="stylesheet" type="text/css" href="jquery-easyui-1.6.6/themes/icon.css"/>
+ 		 <!-- jquery核心库 ，query.easyui.min和jquery.min两个js的引入顺序不能搞错-->
+ 		<script type="text/javascript" src="jquery-easyui-1.6.6/jquery.min.js"></script>
+ 		<!-- easyui核心库 -->
+ 		<script type="text/javascript" src="jquery-easyui-1.6.6/jquery.easyui.min.js"></script>
+ 		 <!--有时候，我们需要进行国际化，比如一些提醒、日历等，就需要引入-->
+ 		<script type="text/javascript" src="jquery-easyui-1.6.6/locale/easyui-lang-zh_CN.js"></script>
+		<script>
+			/* $(function(){
+				$('#tt').pagination({
+					total:2000,
+					pageSize:10
+				});
+				
+			}); */
+			
+			
+			
+			$(function(){
+				$.extend($.fn.validatebox.defaults.rules, {
+					minLength: {
+						validator: function(value, param){
+							var flag = true;
+							/* if(value.length < param[0] || value.length > param[1]){
+								flag = false;
+							} */
+							console.log(!/\d{3}/.test(value));
+							 if(!/\d{3}/.test(value)){
+								flag = false;
+							} 
+							return flag;
+						},
+						message: 'Please enter at least {0} characters.'}
+				});
+		
+			});
+			
+			
+		</script>
+ 	</head>	
+<body class="easyui-layout">
+  <table id="tt" class="easyui-datagrid" style="width:100%;height:250px" data-option="fitColumns:true,singleSeelect:true">
+		<thead>
+			<tr>
+				<th data-options="field:'code',width:'30%'">Code</th>
+				<th data-options="field:'name',width:'30%'">Name</th>
+				<th data-options="field:'price',width:'30%'">Price</th>
+			</tr>
+		</thead>
+	</table>
+	<!-- <div id="pp" style="background:#efefef;border:1px solid #ccc;"></div> -->
+	<div id="pp" class="easyui-pagination" style="background:#efefef;border:1px solid #ccc;"
+		data-options="total:2000,pageSize:10,pagePosition:'bottom'">
+	</div>
+	
+	
+	<input class="easyui-validatebox" data-options="validType:'minLength[4,8]'">
+
+	
+	
+	
+</body>
+</html>
